@@ -7,8 +7,13 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	
-func _input(event):
+
+func _unhandled_key_input(event):
+	print("_unhandled_key_input just received an input: ", event.as_text())
+	# this function is for keyboard events, handled after GUI events, which have priority
+
+func _unhandled_input(event):
+	# this function is for other events, handled after GUI events, which have priority
 	if event is InputEventMouseButton:
 		print("Mouse Click/Unclick at: ", event.position)
 	elif event is InputEventMouseMotion:
