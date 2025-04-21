@@ -1,12 +1,15 @@
-extends Area2D
+extends MovingEntity
 # Keep in mind CharacterBody2D, might be better ?
+
+
+class_name Player
 
 var screen_size: Vector2
 var pointer_position: Vector2
 var can_attack: bool = false
 @export var walk_factor: float = 0.3
 @export var run_multiplier: float = 2.0
-@export var speed: int = 200
+# @export var speed: int = 200
 @export var attack_cd: float = 1.0
 
 
