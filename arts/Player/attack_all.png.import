@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lppgl8i3k8io"
-path="res://.godot/imported/Yellow_Spritesheet.png-8f5c79f468d104c79075edb8dd88115d.ctex"
+uid="uid://bs8pcd5k55dhm"
+path="res://.godot/imported/attack_all.png-04f1653fe6b1402bdb25ec2c00ff7b1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/TinyNin_1.0/Spritesheets/Yellow_Spritesheet.png"
-dest_files=["res://.godot/imported/Yellow_Spritesheet.png-8f5c79f468d104c79075edb8dd88115d.ctex"]
+source_file="res://arts/Player/attack_all.png"
+dest_files=["res://.godot/imported/attack_all.png-04f1653fe6b1402bdb25ec2c00ff7b1b.ctex"]
 
 [params]
 

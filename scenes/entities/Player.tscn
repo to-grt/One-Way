@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cuo7junpcdaew" path="res://arts/Player/player_48_224.png" id="2_ca186"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vux61"]
-radius = 5.0
-height = 18.0
+radius = 6.0
+height = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rcx6m"]
 atlas = ExtResource("2_ca186")
@@ -282,16 +282,15 @@ animations = [{
 script = ExtResource("1_c5pea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11, 14)
+position = Vector2(11, 13)
 shape = SubResource("CapsuleShape2D_vux61")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(11, 13)
 sprite_frames = SubResource("SpriteFrames_xtpot")
-animation = &"idle"
-frame = 1
-frame_progress = 0.628043
+frame = 14
+frame_progress = 0.037818
 
 [node name="AttackTimer" type="Timer" parent="."]
 autostart = true
