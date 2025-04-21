@@ -5,18 +5,30 @@ extends MovingEntity
 class_name Player
 
 var screen_size: Vector2
+var can_attack: bool = true
 var pointer_position: Vector2
-var can_attack: bool = false
+
+var AttackSceneNoPart = preload("res://scenes/sprites/AttackSpriteNoParts.tscn")
+var AttackSceneLow = preload("res://scenes/sprites/AttackSpriteLow.tscn")
+var AttackSceneMed = preload("res://scenes/sprites/AttackSpriteMed.tscn")
+var AttackSceneHigh = preload("res://scenes/sprites/AttackSpriteHigh.tscn")
+
+var available_power_level: Array = ['NoPowerLevel', 'LowPowerLevel', 'MedPowerLevel', 'HighPowerLevel']
+var power_level = 'NoPowerLevel'
+var AttackScene = AttackSceneNoPart
+
 @export var walk_factor: float = 0.3
 @export var run_multiplier: float = 2.0
-# @export var speed: int = 200
 @export var attack_cd: float = 1.0
+# @export var speed: int = 200
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	$AttackTimer.wait_time = attack_cd
+	$AttackTimer.one_shot = true
+	$AttackTimer.timeout.connect(_on_attack_timer_timeout)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -29,10 +41,33 @@ func _input(event: InputEvent):
 		pointer_position = event.position
 		attack()
 
+func change_power_level(new_power_level) -> void:
+	if new_power_level not in available_power_level:
+		push_error("VALUE ERROR: Player.change_power_level() - new_power_level not in avaailable level powers")
+	power_level = new_power_level
+	if power_level == 'NoPowerLevel':
+		AttackScene = AttackSceneNoPart
+	elif power_level == 'LowPowerlevel':
+		AttackScene = AttackSceneLow
+	elif power_level == 'MidPowerLevel':
+		AttackScene = AttackSceneMed
+	elif power_level == 'HighPowerLevel':
+		AttackScene = AttackSceneHigh
+	else:
+		push_error("VALUE ERROR: Player.change_power_level() - Unknown power_level")
+
 func attack() -> void:
-	if can_attack:
-		print("Attacking at ", pointer_position)
+	if not can_attack:
+		return
 	can_attack = false
+
+	var atk = AttackScene.instantiate()
+	atk.position  = global_position
+	atk.direction = (pointer_position - global_position).normalized()
+	
+	# add it to the same parent as the player (e.g. your level root)
+	get_parent().add_child(atk)
+	$AttackTimer.start()
 
 func start(pos: Vector2) -> void:
 	set_new_position(pos)

@@ -293,6 +293,7 @@ frame = 14
 frame_progress = 0.037818
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
